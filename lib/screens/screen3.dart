@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 class Screen3 extends StatelessWidget {
   const Screen3({super.key});
 
+  final Map<String, String> postre = const {
+    'Chocoflan': 'assets/imgs/postre3.jpg',
+    'Postre de cafe': 'assets/imgs/postre1.jpg',
+    'Chescake': 'assets/imgs/postre2.jpg'
+  };
+
   final conejos = const [
     'Gordito',
     'Junior',
@@ -12,24 +18,21 @@ class Screen3 extends StatelessWidget {
     'Foster',
   ];
 
-  final postres = const [
-    'Tarta de frutas',
-    'Pastel 3 leches',
-    'Pastel de durazno',
-    'Pastel de fresa',
-    'Fresas con crema',
-    'Chocoflan',
-    'Tarta de manzana',
-    'Hojandra',
-    'Rollo de frutas',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Ventana 3'),),
       body: ListView(
         children: [
+          ...postre.entries.map((postree){
+            return _tilePostre(postree.key,
+                postree.value,
+                Colors.lightBlue, 
+                Colors.pinkAccent, 
+                Colors.purpleAccent,
+            );
+          }),
+          Divider(),
           ...conejos.map((conejo)=>ListTile(
             leading: Icon(Icons.pets_rounded),
             title: Text(conejo),
@@ -40,19 +43,34 @@ class Screen3 extends StatelessWidget {
             textColor: const Color.fromARGB(255, 65, 33, 243),
           ),
           ),
-          Divider(),
-          ...postres.map((postre)=>ListTile(
-            leading: Icon(Icons.food_bank),
-            title: Text(postre),
-            subtitle: Text('Postres deliciosos'),
-            trailing: Icon(Icons.arrow_forward),
-            tileColor: const Color.fromARGB(255, 248, 185, 206),
-            iconColor: const Color.fromARGB(255, 250, 32, 105),
-            textColor: const Color.fromARGB(255, 243, 33, 177), 
-          ),
-          ),
         ],
       ),
+    );
+  }
+
+  Widget _tilePostre(
+    String posName,
+    String posImage,
+    Color tileColor,
+    Color iconColor,
+    Color textColor
+  ) {
+    final tile = ListTile(
+            leading: Image.asset(posImage, width: 50, height: 60),
+            title: Text(posName),
+            subtitle: Text('Postres deliciosos'),
+            trailing: Icon(Icons.arrow_forward),
+            tileColor: tileColor,
+            iconColor: iconColor,
+            textColor: textColor, 
+    );
+
+    final espacio = SizedBox(height: 10);
+    return Column(
+      children: [
+        tile,
+        espacio
+      ],
     );
   }
 }
