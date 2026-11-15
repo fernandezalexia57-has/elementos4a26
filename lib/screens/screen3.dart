@@ -9,14 +9,13 @@ class Screen3 extends StatelessWidget {
     'Chescake': 'assets/imgs/postre2.jpg'
   };
 
-  final conejos = const [
-    'Gordito',
-    'Junior',
-    'Fetuccine',
-    'Manchas',
-    'Winter',
-    'Foster',
-  ];
+  final Map<String, String> conejo = const {
+    'Gordito': 'assets/imgs/gordito.png',
+    'Chocolate': 'assets/imgs/chocolate.png',
+    'Jules': 'assets/imgs/jules.png',
+    'Winter': 'assets/imgs/winter.png',
+    'Manchas': 'assets/imgs/manchas.png'
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +26,20 @@ class Screen3 extends StatelessWidget {
           ...postre.entries.map((postree){
             return _tilePostre(postree.key,
                 postree.value,
-                Colors.lightBlue, 
-                Colors.pinkAccent, 
-                Colors.purpleAccent,
+                const Color.fromARGB(255, 255, 194, 214), 
+                const Color.fromARGB(255, 255, 25, 0),
+                const Color.fromARGB(255, 3, 63, 244), 
             );
           }),
           Divider(),
-          ...conejos.map((conejo)=>ListTile(
-            leading: Icon(Icons.pets_rounded),
-            title: Text(conejo),
-            subtitle: Text('Un conejo maravilloso'),
-            trailing: Icon(Icons.arrow_forward),
-            tileColor: const Color.fromARGB(255, 101, 186, 255),
-            iconColor: const Color.fromARGB(255, 0, 137, 250),
-            textColor: const Color.fromARGB(255, 65, 33, 243),
-          ),
-          ),
+          ...conejo.entries.map((conejoo){
+            return _tileConejo(conejoo.key,
+                conejoo.value,
+                const Color.fromARGB(255, 73, 175, 247), 
+                const Color.fromARGB(255, 26, 10, 255),
+                const Color.fromARGB(255, 228, 233, 227), 
+            );
+          }),
         ],
       ),
     );
@@ -59,6 +56,33 @@ class Screen3 extends StatelessWidget {
             leading: Image.asset(posImage, width: 50, height: 60),
             title: Text(posName),
             subtitle: Text('Postres deliciosos'),
+            trailing: Icon(Icons.arrow_forward),
+            tileColor: tileColor,
+            iconColor: iconColor,
+            textColor: textColor, 
+    );
+
+    final espacio = SizedBox(height: 10);
+    return Column(
+      children: [
+        tile,
+        espacio
+      ],
+    );
+  }
+
+
+    Widget _tileConejo(
+    String posName,
+    String posImage,
+    Color tileColor,
+    Color iconColor,
+    Color textColor
+  ) {
+    final tile = ListTile(
+            leading: Icon(Icons.pets_rounded),
+            title: Image.asset(posImage, width: 50, height: 60),
+            subtitle: Text(posName),
             trailing: Icon(Icons.arrow_forward),
             tileColor: tileColor,
             iconColor: iconColor,
